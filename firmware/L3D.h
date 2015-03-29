@@ -38,6 +38,7 @@ struct Point
 class Cube
 {
   private:
+    int maxBrightness;
     bool onlinePressed;
     bool lastOnline;
     Adafruit_NeoPixel strip;
@@ -50,7 +51,6 @@ class Cube
 
   public:
     int size;
-    int maxBrightness;
 
     Cube(unsigned int s, unsigned int mb);
     Cube(void);
@@ -75,7 +75,7 @@ class Cube
     void begin(void);
     void show(void);
     void listen(void);
-    void initCloudButton(void);
+    void initButtons(void);
     void onlineOfflineSwitch(void);
     void joinWifi(void);
     void updateNetworkInfo(void);

@@ -10,11 +10,12 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
   @return A new Cube object.
   */
 Cube::Cube(unsigned int s, unsigned int mb) : \
-    size(s), 
     maxBrightness(mb),
     onlinePressed(false),
     lastOnline(true),
-    strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)) { }
+    strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)),
+    size(s)
+{ }
 
 /** Construct a new cube with default settings.
   @param s Size of one side of the cube in number of LEDs.
@@ -23,16 +24,15 @@ Cube::Cube(unsigned int s, unsigned int mb) : \
   @return A new Cube object.
   */
 Cube::Cube() : \
-    size(8), 
     maxBrightness(50),
     onlinePressed(false),
-    lastOnline(true),
-    strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)) { }
+    lastOnline(true), 
+    strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)),
+    size(8)
+{ }
 
 /** Initialization of cube resources and environment. */
 void Cube::begin(void) {
-  this->updateNetworkInfo();
-
   // initialize Spark variables
   int (Cube::*setPort)(String) = &Cube::setPort;
 
@@ -41,8 +41,10 @@ void Cube::begin(void) {
   Spark.variable("port", &this->port, INT);
   Spark.function("setPort", (int (*)(String)) setPort);
 
-  this->initCloudButton();
+  this->initButtons();
   this->udp.begin(STREAMING_PORT);
+  this->updateNetworkInfo();
+
 }
 
 /** Set a voxel at a position to a color.
@@ -410,8 +412,8 @@ void Cube::show()
   strip.show();
 }
 
-/** Initialize cloud switch hardware. */
-void Cube::initCloudButton() {
+/** Initialize online/offline switch and the join wifi button */
+void Cube::initButtons() {
   //set the input mode for the 'connect to cloud' button
   pinMode(INTERNET_BUTTON, INPUT_PULLUP);
   pinMode(MODE, INPUT_PULLUP);
@@ -428,7 +430,7 @@ void Cube::initCloudButton() {
   void (Cube::*check)(void) = &Cube::onlineOfflineSwitch;
   attachInterrupt(INTERNET_BUTTON, (void (*)())check, CHANGE);
 
-  void (Cube::*check)(void) = &Cube::joinWifi;
+  void (Cube::*wifi)(void) = &Cube::joinWifi;
   attachInterrupt(MODE, (void (*)())wifi, FALLING);
 }
 
@@ -453,10 +455,9 @@ void Cube::onlineOfflineSwitch() {
 
   this->lastOnline = this->onlinePressed;
 
-  if(!digitalRead(MODE))
 }
 
-void cube::joinWifi()
+void Cube::joinWifi()
 {
     WiFi.listen();
 }
