@@ -1,6 +1,6 @@
 {
     "name": "L3D",
-    "version": "0.1.6",
+    "version": "0.1.7",
     "author": "Owen Trueblood <owen@owentrueblood.me>",
     "license": "MIT",
     "description": "Controls the L3D Cube from Looking Glass."
