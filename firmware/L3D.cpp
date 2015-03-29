@@ -232,10 +232,29 @@ void Cube::sphere(Point p, int r, Color col)
 */
 void Cube::shell(float x, float y,float z, float r, Color col)
 {
+  float thickness =0.1;
   for(int i=0;i<size;i++)
     for(int j=0;j<size;j++)
       for(int k=0;k<size;k++)
-	if(abs(sqrt(pow(i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<1)
+	if(abs(sqrt(pow(i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<thickness)
+	  setVoxel(i,j,k,col);
+}
+
+/** Draw a shell (empty sphere).
+
+  @param x Position of the center of the shell.
+  @param y Position of the center of the shell.
+  @param z Position of the center of the shell.
+  @param r Radius of the shell.
+  @param thickness Thickness of the shell.
+  @param col Color of the shell.
+*/
+void Cube::shell(float x, float y,float z, float r, float thickness, Color col)
+{
+  for(int i=0;i<size;i++)
+    for(int j=0;j<size;j++)
+      for(int k=0;k<size;k++)
+	if(abs(sqrt(pow(i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<thickness)
 	  setVoxel(i,j,k,col);
 }
 
@@ -245,9 +264,21 @@ void Cube::shell(float x, float y,float z, float r, Color col)
   @param r Radius of the shell.
   @param col Color of the shell.
 */
-void Cube::shell(Point p, int r, Color col)
+void Cube::shell(Point p, float r, Color col)
 {
   shell(p.x, p.y, p.z, r, col);
+}
+
+/** Draw a shell (empty sphere).
+
+  @param p Position of the center of the shell.
+  @param r Radius of the shell.
+  @param thickness Thickness of the shell
+  @param col Color of the shell.
+*/
+void Cube::shell(Point p, float r, float thickness, Color col)
+{
+  shell(p.x, p.y, p.z, r, thickness, col);
 }
 
 /** Draw an empty circle in the XZ plane.

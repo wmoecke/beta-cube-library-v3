@@ -64,7 +64,9 @@ class Cube
     void sphere(int x, int y, int z, int r, Color col);
     void sphere(Point p, int r, Color col);
     void shell(float x, float y, float z, float r, Color col);
-    void shell(Point p, int r, Color col);
+    void shell(float x, float y, float z, float r, float thickness, Color col);
+    void shell(Point p, float r, Color col);
+    void shell(Point p, float r, float thickness, Color col);
     void background(Color col);
 
     Color colorMap(float val, float min, float max);
