@@ -224,17 +224,19 @@ void Cube::sphere(Point p, int r, Color col)
 
 /** Draw a shell (empty sphere).
 
-  @param p Position of the center of the shell.
+  @param x Position of the center of the shell.
+  @param y Position of the center of the shell.
+  @param z Position of the center of the shell.
   @param r Radius of the shell.
   @param col Color of the shell.
 */
-void Cube::shell(int x, int y, int z, int r, Color col)
+void Cube::shell(float x, float y,float z, float r, Color col)
 {
-  for(int i = 0; i <= 2*r; i++) {
-    int dy = i - r;
-    int lr = sqrt((float)(i*(2*r-i)));
-    this->emptyFlatCircle(x, y + dy, z, lr, col);
-  }
+  for(int i=0;i<size;i++)
+    for(int j=0;j<size;j++)
+      for(int k=0;k<size;k++)
+	if(abs(sqrt(pow(i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<1)
+	  setVoxel(i,j,k,col);
 }
 
 /** Draw a shell (empty sphere).

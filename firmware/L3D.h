@@ -63,7 +63,7 @@ class Cube
     void line(Point p1, Point p2, Color col);
     void sphere(int x, int y, int z, int r, Color col);
     void sphere(Point p, int r, Color col);
-    void shell(int x, int y, int z, int r, Color col);
+    void shell(float x, float y, float z, float r, Color col);
     void shell(Point p, int r, Color col);
     void background(Color col);
 
