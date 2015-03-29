@@ -29,7 +29,6 @@ struct Point
   float y;
   float z;
 
-  Point(int x, int y, int z) : x(x), y(y), z(z) {}
   Point(float x, float y, float z) : x(x), y(y), z(z) {}
 };
 
