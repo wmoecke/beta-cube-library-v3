@@ -38,8 +38,6 @@ struct Point
 class Cube
 {
   private:
-    unsigned int size;
-    unsigned int maxBrightness;
     bool onlinePressed;
     bool lastOnline;
     Adafruit_NeoPixel strip;
@@ -52,6 +50,9 @@ class Cube
     void emptyFlatCircle(int x, int y, int z, int r, Color col);
 
   public:
+    unsigned int size;
+    unsigned int maxBrightness;
+
     Cube(unsigned int s, unsigned int mb);
     Cube(void);
 
