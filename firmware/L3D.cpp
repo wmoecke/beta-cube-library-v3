@@ -323,9 +323,9 @@ void Cube::emptyFlatCircle(int x, int y, int z, int r, Color col)
 */
 void Cube::background(Color col)
 {
-  for(unsigned int x = 0; x < this->size; x++)
-    for(unsigned int y = 0; y < this->size; y++)
-      for(unsigned int z = 0; z < this->size; z++)
+  for(int x = 0; x < this->size; x++)
+    for(int y = 0; y < this->size; y++)
+      for(int z = 0; z < this->size; z++)
         setVoxel(x, y, z, col);
 }
 
@@ -425,12 +425,15 @@ void Cube::initCloudButton() {
   if(onlinePressed)
     Spark.connect();
 
-  void (Cube::*check)(void) = &Cube::checkCloudButton;
+  void (Cube::*check)(void) = &Cube::onlineOfflineSwitch;
   attachInterrupt(INTERNET_BUTTON, (void (*)())check, CHANGE);
+
+  void (Cube::*check)(void) = &Cube::joinWifi;
+  attachInterrupt(MODE, (void (*)())wifi, FALLING);
 }
 
-/** Check cloud switch hardware. */
-void Cube::checkCloudButton() {
+/** react to a change of the online/offline switch */
+void Cube::onlineOfflineSwitch() {
   // if the 'connect to cloud' button is pressed, try to connect to wifi.  
   // otherwise, run the program
 
@@ -451,6 +454,10 @@ void Cube::checkCloudButton() {
   this->lastOnline = this->onlinePressed;
 
   if(!digitalRead(MODE))
+}
+
+void cube::joinWifi()
+{
     WiFi.listen();
 }
 
@@ -471,10 +478,10 @@ void Cube::listen() {
     char data[512];
     this->udp.read(data, bytesrecv);
 
-    for(unsigned int x = 0; x < this->size; x++) {
-      for(unsigned int y = 0; y < this->size; y++) {
-        for(unsigned int z = 0; z < this->size; z++) {
-          int index = z*64 + y*8 + x;
+    for(int x = 0; x < this->size; x++) {
+      for(int y = 0; y < this->size; y++) {
+        for(int z = 0; z < this->size; z++) {
+          int index = z*this->size + y*this->size + x;
           Color pixelColor = Color((data[index]&0xE0)>>2, (data[index]&0x1C)<<1, (data[index]&0x03)<<4);   //colors with max brightness set to 64
           setVoxel(x, y, z, pixelColor);
         }

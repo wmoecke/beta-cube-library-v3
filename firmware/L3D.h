@@ -76,7 +76,8 @@ class Cube
     void show(void);
     void listen(void);
     void initCloudButton(void);
-    void checkCloudButton(void);
+    void onlineOfflineSwitch(void);
+    void joinWifi(void);
     void updateNetworkInfo(void);
     int setPort(String port);
 };
