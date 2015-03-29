@@ -1,6 +1,8 @@
 #include <math.h>
 #include "L3D.h"
 
+SYSTEM_MODE(SEMI_AUTOMATIC);
+
 /** Construct a new cube.
   @param s Size of one side of the cube in number of LEDs.
   @param mb Maximum brightness value. Used to prevent the LEDs from drawing too much current (which causes the colors to distort).
