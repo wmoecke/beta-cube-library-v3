@@ -28,8 +28,7 @@ struct Point
   float x;
   float y;
   float z;
-
-  Point(float x, float y, float z) : x(x), y(y), z(z) {}
+  Point(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 };
 
 /**   An L3D LED cube.
@@ -46,12 +45,11 @@ class Cube
     char localIP[24];
     char macAddress[20];
     int port;
-
     void emptyFlatCircle(int x, int y, int z, int r, Color col);
 
   public:
-    unsigned int size;
-    unsigned int maxBrightness;
+    int size;
+    int maxBrightness;
 
     Cube(unsigned int s, unsigned int mb);
     Cube(void);
