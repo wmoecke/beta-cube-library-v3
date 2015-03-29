@@ -1,5 +1,5 @@
 #include <math.h>
-#include "l3d-cube.h"
+#include "L3D.h"
 
 /** Construct a new cube.
   @param s Size of one side of the cube in number of LEDs.

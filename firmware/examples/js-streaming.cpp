@@ -3,7 +3,7 @@
 
 #include "SparkWebSocketServer.h"
 
-#include "l3d-cube/l3d-cube.h"
+#include "L3D/L3D.h"
 
 TCPServer server = TCPServer(2525);
 Cube cube = Cube();

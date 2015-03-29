@@ -1,5 +1,5 @@
-#ifndef _L3D_CUBE_H
-#define _L3D_CUBE_H
+#ifndef _L3D_H
+#define _L3D_H
 
 #include "application.h"
 #include "neopixel.h"

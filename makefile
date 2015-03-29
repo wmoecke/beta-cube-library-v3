@@ -1,16 +1,16 @@
-LIB_NAME = l3d-cube
+LIB_NAME = L3D
 
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 BUILD_DIR = $(SELF_DIR)bin/
 
-FIRMWARE_DIR = ../spark/firmware/
+FIRMWARE_DIR = /Users/japhy/Dropbox/sparkware/firmware/
 SRC_DIR = firmware/
 EXAMPLE_DIR = $(SRC_DIR)examples/
 
 EXAMPLES = $(wildcard $(EXAMPLE_DIR)*.cpp)
 EXAMPLE_BINS = $(addprefix $(BUILD_DIR),$(notdir $(patsubst %.cpp,%.bin,$(EXAMPLES))))
 
-SOURCES = firmware/l3d-cube.cpp \
+SOURCES = firmware/L3D.cpp \
 	  firmware/neopixel.cpp \
 	  firmware/SparkWebSocketServer.cpp \
 	  firmware/Base64.cpp
