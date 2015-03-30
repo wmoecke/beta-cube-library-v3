@@ -1,4 +1,4 @@
-#include "L3D/L3D.h"
+#include "L3D/beta-cube-library.h"
 
 Cube cube = Cube();
 

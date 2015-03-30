@@ -1,5 +1,5 @@
 #include <math.h>
-#include "L3D.h"
+#include "beta-cube-library.h"
 
 SYSTEM_MODE(SEMI_AUTOMATIC);
 
