@@ -1,7 +1,7 @@
 {
-    "name": "L3D",
-    "version": "0.1.7",
-    "author": "Owen Trueblood <owen@owentrueblood.me>",
+    "name": "beta-cube-library",
+    "version": "0.2.0",
+    "author": "Alex Hornstein & Owen Trueblood",
     "license": "MIT",
-    "description": "Controls the L3D Cube from Looking Glass."
+    "description": "Controls an LED Cube"
 }
