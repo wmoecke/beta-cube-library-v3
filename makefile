@@ -1,4 +1,4 @@
-LIB_NAME = L3D
+LIB_NAME = beta-cube-library
 
 SELF_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 BUILD_DIR = $(SELF_DIR)bin/
@@ -10,7 +10,7 @@ EXAMPLE_DIR = $(SRC_DIR)examples/
 EXAMPLES = $(wildcard $(EXAMPLE_DIR)*.cpp)
 EXAMPLE_BINS = $(addprefix $(BUILD_DIR),$(notdir $(patsubst %.cpp,%.bin,$(EXAMPLES))))
 
-SOURCES = firmware/L3D.cpp \
+SOURCES = firmware/beta-cube-library.cpp \
 	  firmware/neopixel.cpp \
 	  firmware/SparkWebSocketServer.cpp \
 	  firmware/Base64.cpp

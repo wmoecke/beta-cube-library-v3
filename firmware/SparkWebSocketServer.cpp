@@ -340,15 +340,15 @@ bool SparkWebSocketServer::analyzeRequest(TCPClient &client)
             } else if(!foundUpgrade && temp.startsWith("Upgrade: websocket")) {
                 foundUpgrade = true; // OK, it's a websockets handshake for sure
             } else if(temp.startsWith("Origin: ")) {
-                origin = temp.substring(8, temp.length() - 2); // Don't save last CR+LF
+                origin = ""+temp.substring(8, temp.length() - 2); // Don't save last CR+LF
             } else if(temp.startsWith("Host: ")) {
-                host = temp.substring(6, temp.length() - 2); // Don't save last CR+LF
+                host = ""+temp.substring(6, temp.length() - 2); // Don't save last CR+LF
             } else if(temp.startsWith("Sec-WebSocket-Key1: ")) {
-                oldKey[0] = temp.substring(20, temp.length() - 2); // Don't save last CR+LF
+                oldKey[0] = ""+temp.substring(20, temp.length() - 2); // Don't save last CR+LF
             } else if(temp.startsWith("Sec-WebSocket-Key2: ")) {
-                oldKey[1] = temp.substring(20, temp.length() - 2); // Don't save last CR+LF
+                oldKey[1] = ""+temp.substring(20, temp.length() - 2); // Don't save last CR+LF
             } else if(temp.startsWith("Sec-WebSocket-Key: ")) {
-                newKey = temp.substring(19, temp.length() - 2); // Don't save last CR+LF
+                newKey = ""+temp.substring(19, temp.length() - 2); // Don't save last CR+LF
             }
 
             temp = "";
