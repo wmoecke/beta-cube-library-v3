@@ -422,7 +422,7 @@ void Cube::initButtons() {
     WiFi.listen();
 
   //a.k.a. onlinePressed is HIGH when the switch is set to 'online' and LOW when the switch is set to 'offline'
-  this->onlinePressed = digitalRead(INTERNET_BUTTON);
+  this->onlinePressed = !digitalRead(INTERNET_BUTTON);
 
   if(onlinePressed)
     Spark.connect();
@@ -441,7 +441,7 @@ void Cube::onlineOfflineSwitch() {
 
   // onlinePressed is HIGH when the switch is _not_ connected and LOW when the switch is connected
   // a.k.a. onlinePressed is HIGH when the switch is set to 'online' and LOW when the switch is set to 'offline'
-  this->onlinePressed = digitalRead(INTERNET_BUTTON);
+  this->onlinePressed = !digitalRead(INTERNET_BUTTON);
 
   if((!this->onlinePressed) && (this->lastOnline)) {
     //marked as 'online'
