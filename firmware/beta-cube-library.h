@@ -2,7 +2,7 @@
 #define _L3D_H
 
 #include "application.h"
-#include "neopixel.h"
+#include "neopixel/neopixel.h"
 
 #if defined(PLATFORM_ID)
 #if (PLATFORM_ID == 0) // Core
