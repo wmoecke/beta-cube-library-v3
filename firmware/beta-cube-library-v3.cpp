@@ -58,22 +58,6 @@ void Cube::begin(void) {
   Particle.connect();
 }
 
-/** Overloaded != operator. */
-bool Cube::operator!= (const Color& b) const {
-    if(red != b.red) return true;
-    if(green != b.green) return true;
-    if(blue != b.blue) return true;
-    return false;
-}
-
-/** Overloaded == operator. */
-bool Cube::operator== (const Color& b) const {
-    if(red != b.red) return false;
-    if(green != b.green) return false;
-    if(blue != b.blue) return false;
-    return true;
-}
-
 /** Set a voxel at a position to a color.
 
   @param x, y, z Coordinate of the LED to set.

@@ -54,6 +54,22 @@ struct Point
   Point(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 };
 
+/** Overloaded != operator. */
+bool operator!= (const Color& b) const {
+    if(red != b.red) return true;
+    if(green != b.green) return true;
+    if(blue != b.blue) return true;
+    return false;
+}
+
+/** Overloaded == operator. */
+bool operator== (const Color& b) const {
+    if(red != b.red) return false;
+    if(green != b.green) return false;
+    if(blue != b.blue) return false;
+    return true;
+}
+
 /**   An L3D LED cube.
       Provides methods for drawing in 3D. Controls the LED hardware.
 */
@@ -601,8 +617,6 @@ class Cube
     Cube(unsigned int s, unsigned int mb, unsigned int ft);
     Cube(void);
 
-	bool operator!= (const Color& b) const;  // overloaded != operator
-	bool operator== (const Color& b) const;  // overloaded == operator
     void setVoxel(int x, int y, int z, Color col);
     void setVoxel(Point p, Color col);
     Color getVoxel(int x, int y, int z);
