@@ -59,18 +59,18 @@ void Cube::begin(void) {
 }
 
 /** Overloaded != operator. */
-bool Cube::operator != (const Color& a, const Color& b) {
-    if(a.red != b.red) return true;
-    if(a.green != b.green) return true;
-    if(a.blue != b.blue) return true;
+bool Cube::operator != (const Color& c) {
+    if(this.red != c.red) return true;
+    if(this.green != c.green) return true;
+    if(this.blue != c.blue) return true;
     return false;
 }
 
 /** Overloaded == operator. */
-bool Cube::operator == (const Color& a, const Color& b) {
-    if(a.red != b.red) return false;
-    if(a.green != b.green) return false;
-    if(a.blue != b.blue) return false;
+bool Cube::operator == (const Color& c) {
+    if(this.red != c.red) return false;
+    if(this.green != c.green) return false;
+    if(this.blue != c.blue) return false;
     return true;
 }
 
