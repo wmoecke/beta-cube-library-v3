@@ -54,6 +54,22 @@ struct Point
   Point(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 };
 
+/** Overloaded != operator. */
+bool operator!= (const Color& a, const Color& b) {
+    if(a.red != b.red) return true;
+    if(a.green != b.green) return true;
+    if(a.blue != b.blue) return true;
+    return false;
+}
+
+/** Overloaded == operator. */
+bool operator== (const Color& a, const Color& b) {
+    if(a.red != b.red) return false;
+    if(a.green != b.green) return false;
+    if(a.blue != b.blue) return false;
+    return true;
+}
+
 /**   An L3D LED cube.
       Provides methods for drawing in 3D. Controls the LED hardware.
 */
