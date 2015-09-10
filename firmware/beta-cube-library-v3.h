@@ -601,8 +601,8 @@ class Cube
     Cube(unsigned int s, unsigned int mb, unsigned int ft);
     Cube(void);
 
-	bool operator != (const Color& b) const;  // overloaded != operator
-	bool operator == (const Color& b) const;  // overloaded == operator
+	bool operator!= (const Color& b);  // overloaded != operator
+	bool operator== (const Color& b);  // overloaded == operator
     void setVoxel(int x, int y, int z, Color col);
     void setVoxel(Point p, Color col);
     Color getVoxel(int x, int y, int z);
