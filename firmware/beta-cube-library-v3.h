@@ -55,7 +55,7 @@ struct Point
 };
 
 /** Overloaded != operator. */
-bool operator!= (const Color& b) const {
+bool operator!= (const Color& b) {
     if(red != b.red) return true;
     if(green != b.green) return true;
     if(blue != b.blue) return true;
@@ -63,7 +63,7 @@ bool operator!= (const Color& b) const {
 }
 
 /** Overloaded == operator. */
-bool operator== (const Color& b) const {
+bool operator== (const Color& b) {
     if(red != b.red) return false;
     if(green != b.green) return false;
     if(blue != b.blue) return false;
