@@ -542,7 +542,7 @@ int Cube::setPort(String _port) {
 
 /** Text functions. */
 void Cube::showChar(char a, Point p, Color col) {
-    for(int row=0;row<8;row++)
+    for(int row=0;row<this->size;row++)
         for(int bit=0;bit<8;bit++)
             if(((font[((int)a+this->selectedFont)*8+row]>>(7-bit))&0x01)==1)
                 this->setVoxel(p.x+bit, (p.y)+(this->size-1-row), p.z, col);
@@ -553,7 +553,7 @@ void Cube::showChar(char a, Point origin, Point angle, Color col) {
 }
 
 void Cube::showChar(char a, Point origin, Point pivot, Point angle, Color col) {
-    for(int row=0;row<8;row++)
+    for(int row=0;row<this->size;row++)
         for(int bit=0;bit<8;bit++)
             if(((font[((int)a+this->selectedFont)*8+(7-row)]>>(7-bit))&0x01)==1)
                 this->setVoxel(origin.x+((float)bit-pivot.x)*cos(angle.y), 
@@ -563,21 +563,21 @@ void Cube::showChar(char a, Point origin, Point pivot, Point angle, Color col) {
 
 void Cube::scrollSpinningText(std::string text, Point initialPosition, Color col) {
     for(int i=0;i<text.length();i++)
-        this->showChar(text.at(i), Point(8*i-initialPosition.x, initialPosition.y, initialPosition.z), Point(0,initialPosition.x,0), col);
+        this->showChar(text.at(i), Point(this->size*i-initialPosition.x, initialPosition.y, initialPosition.z), Point(0,initialPosition.x,0), col);
 }
 
 void Cube::scrollText(std::string text, Point initialPosition, Color col) {
     for(int i=0;i<text.length();i++)
-        this->showChar(text.at(i), Point(8*i-initialPosition.x, initialPosition.y, initialPosition.z), col);
+        this->showChar(text.at(i), Point(this->size*i-initialPosition.x, initialPosition.y, initialPosition.z), col);
 }
 
 void Cube::marquee(std::string text, float pos, Color col) {
     for(int i=0;i<text.length();i++)
-        this->showMarqueeChar(text.at(i), (int)pos - 8*i, col);
+        this->showMarqueeChar(text.at(i), (int)pos - this->size*i, col);
 }
 
 void Cube::showMarqueeChar(char a, int pos, Color col) {		 
-    for(int row=0;row<8;row++)
+    for(int row=0;row<this->size;row++)
         for(int bit=0;bit<8;bit++)
             if(((font[((int)a+this->selectedFont)*8+row]>>(7-bit))&0x01)==1) {
                 if((pos-bit)<this->size)
