@@ -602,7 +602,5 @@ void Cube::showMarqueeChar(char a, int pos, Color col) {
                     this->setVoxel((this->size-1)-(pos-bit-this->size), this->size-1-row, this->size-1, col);
                 if((pos-bit)>2*this->size)
                     this->setVoxel(0, this->size-1-row, this->size-1-(pos-bit-2*this->size), col);
-                if((pos-bit)>3*this->size)
-                    this->setVoxel(0, this->size-1-row, this->size-1-(pos-bit-3*this->size), col);
             }
 }
