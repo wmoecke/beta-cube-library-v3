@@ -55,18 +55,18 @@ struct Point
 };
 
 /** Overloaded != operator. */
-bool operator!= (const Color& b) {
-    if(red != b.red) return true;
-    if(green != b.green) return true;
-    if(blue != b.blue) return true;
+bool operator!= (const Color& a, const Color& b) {
+    if(a.red != b.red) return true;
+    if(a.green != b.green) return true;
+    if(a.blue != b.blue) return true;
     return false;
 }
 
 /** Overloaded == operator. */
-bool operator== (const Color& b) {
-    if(red != b.red) return false;
-    if(green != b.green) return false;
-    if(blue != b.blue) return false;
+bool operator== (const Color& a, const Color& b) {
+    if(a.red != b.red) return false;
+    if(a.green != b.green) return false;
+    if(a.blue != b.blue) return false;
     return true;
 }
 
