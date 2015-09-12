@@ -74,7 +74,6 @@ class Cube
     char localIP[24];
     char macAddress[20];
     int port;
-    void emptyFlatCircle(int x, int y, int z, int r, Color col);
 	
 	// Text members
 	const unsigned int COMPUTER_FONT=0;
@@ -619,6 +618,7 @@ class Cube
     void shell(float x, float y, float z, float r, float thickness, Color col);
     void shell(Point p, float r, Color col);
     void shell(Point p, float r, float thickness, Color col);
+    void emptyFlatCircle(int x, int y, int z, int r, Color col);
     void updateAccelerometer();
     void background(Color col);
 

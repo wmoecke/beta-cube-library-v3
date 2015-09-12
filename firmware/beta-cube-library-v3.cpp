@@ -30,7 +30,7 @@ Cube::Cube(unsigned int s, unsigned int mb, unsigned int ft) : \
   */
 Cube::Cube() : \
     maxBrightness(50),
-    onlinePressed(true),
+    onlinePressed(false),
     lastOnline(true), 
     strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)),
     size(8),
@@ -43,7 +43,7 @@ Cube::Cube() : \
 /** Initialization of cube resources and environment. */
 void Cube::begin(void) {
   this->strip.begin();
-  this->center=Point((size-1)/2,(size-1)/2,(size-1)/2);  
+  this->center=Point((this->size-1)/2,(this->size-1)/2,(this->size-1)/2);  
   // initialize Spark variables
   int (Cube::*setPort)(String) = &Cube::setPort;
 
@@ -267,7 +267,7 @@ void Cube::shell(float x, float y,float z, float r, Color col)
   for(int i=0;i<this->size;i++)
     for(int j=0;j<this->size;j++)
       for(int k=0;k<this->size;k++)
-    	if(abs(sqrt(pow(i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<thickness)
+    	if(abs(sqrt((i-x,2)+pow(j-y,2)+pow(k-z,2))-r)<thickness)
     	  this->setVoxel(i,j,k,col);
 }
 
@@ -437,8 +437,10 @@ Color Cube::lerpColor(Color a, Color b, int val, int minVal, int maxVal)
 void Cube::show()
 {
   this->strip.show();
-  if(this->onlinePressed)
+  if(this->onlinePressed) {
     Particle.process();
+    this->listen();	// we're forcing the cube to listen for UDP streaming
+  }
 }
 
 /** Initialize online/offline switch and the join wifi button */
@@ -493,7 +495,7 @@ void Cube::joinWifi()
 
 /** Listen for the start of UDP streaming. */
 void Cube::listen() {
-  int32_t bytesrecv = udp.parsePacket();
+  int32_t bytesrecv = this->udp.parsePacket();
 
   // no data, nothing to do
   if(bytesrecv == 0) return;
@@ -506,7 +508,7 @@ void Cube::listen() {
 
   if(bytesrecv == PIXEL_COUNT) {
     char data[512];
-    udp.read(data, bytesrecv);
+    this->udp.read(data, bytesrecv);
 
     for(int x = 0; x < this->size; x++) {
       for(int y = 0; y < this->size; y++) {
@@ -552,8 +554,8 @@ void Cube::updateNetworkInfo() {
 */
 int Cube::setPort(String _port) {
   this->port = _port.toInt();
-  udp.begin(port);
-  return port;
+  this->udp.begin(this->port);
+  return this->port;
 }
 
 /** Text functions. */
@@ -565,7 +567,7 @@ void Cube::showChar(char a, Point p, Color col) {
 }
 
 void Cube::showChar(char a, Point origin, Point angle, Color col) {
-    showChar(a, origin, Point(0,0,0), angle, col);
+	this->showChar(a, origin, Point(0,0,0), angle, col);
 }
 
 void Cube::showChar(char a, Point origin, Point pivot, Point angle, Color col) {
