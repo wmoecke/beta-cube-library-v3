@@ -9,17 +9,15 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 
   @return A new Cube object.
   */
-Cube::Cube(unsigned int s, unsigned int mb, unsigned int ft) : \
+Cube::Cube(unsigned int s, unsigned int mb) : \
     maxBrightness(mb),
-    onlinePressed(false),
+    onlinePressed(true),
     lastOnline(true),
     strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)),
     size(s),
 	// initialize Text members
     done(false),
-    looping(false),
-    selectedFont((ft==CUBE_FONT || ft==COMPUTER_FONT) 
-				? ft : CUBE_FONT)
+    looping(false)
 { }
 
 /** Construct a new cube with default settings.
@@ -30,7 +28,7 @@ Cube::Cube(unsigned int s, unsigned int mb, unsigned int ft) : \
   */
 Cube::Cube() : \
     maxBrightness(50),
-    onlinePressed(false),
+    onlinePressed(true),
     lastOnline(true), 
     strip(Adafruit_NeoPixel(PIXEL_COUNT, PIXEL_PIN, PIXEL_TYPE)),
     size(8),
@@ -44,6 +42,7 @@ Cube::Cube() : \
 void Cube::begin(void) {
   this->strip.begin();
   this->center=Point((this->size-1)/2,(this->size-1)/2,(this->size-1)/2);  
+  this->selectedFont=FontType::CUBE_FONT;
   // initialize Spark variables
   int (Cube::*setPort)(String) = &Cube::setPort;
 
@@ -507,7 +506,7 @@ void Cube::listen() {
   }
 
   if(bytesrecv == PIXEL_COUNT) {
-    char data[512];
+    char data[PIXEL_COUNT];
     this->udp.read(data, bytesrecv);
 
     for(int x = 0; x < this->size; x++) {
@@ -602,7 +601,9 @@ void Cube::showMarqueeChar(char a, int pos, Color col) {
                     this->setVoxel(this->size-1, this->size-1-row, pos-bit, col);
                 if(((pos-bit)>=this->size)&&((pos-bit)<2*this->size))
                     this->setVoxel((this->size-1)-(pos-bit-this->size), this->size-1-row, this->size-1, col);
-                if((pos-bit)>2*this->size)
+                if(((pos-bit)>=2*this->size)&&((pos-bit)<3*this->size))
                     this->setVoxel(0, this->size-1-row, this->size-1-(pos-bit-2*this->size), col);
+                if((pos-bit)>3*this->size)
+                    this->setVoxel(pos-bit-3*this->size, this->size-1-row, 0, col);
             }
 }

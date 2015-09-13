@@ -1,11 +1,6 @@
 #include "beta-cube-library.h"
 
-// Define the paging start address of the font table
-const int COMPUTER_FONT=0;
-const int CUBE_FONT=256;    
-
-Cube cube = Cube(8, 50, CUBE_FONT);
-//Cube cube = Cube();
+Cube cube = Cube();
 
 float pos = 0;
 float posInc = .1;
@@ -34,32 +29,39 @@ void loop() {
 
 void drawCube() {
     cube.background(black);
+    int endOfMessage = (mode == 3) ? 1.3 * cube.size : cube.size;
     switch(mode) {
         case(0):    
+            cube.selectedFont=FontType::CUBE_FONT;
             cube.showChar('L', Point(3.5, 0, 3.5), Point(0, pos, 0), cube.colorMap(frameCount%1000, 0, 1000));
             break;  
         case(1):
+            cube.selectedFont=FontType::CUBE_FONT;
             cube.showChar('3', Point(1, 3.5, 3.5), Point(0, 3.5, 0), Point(pos, 0, 0), cube.colorMap(frameCount%1000, 0, 1000));
             break;  
         case(2):
+            cube.selectedFont=FontType::CUBE_FONT;
             cube.showChar('D', Point(3.5, 3.5, 3.5), Point(3.5, 3.5, 3.5), Point(0, pos, 0), cube.colorMap(frameCount%1000, 0, 1000));
             break;  
         case(3):
+            cube.selectedFont=FontType::CUBE_FONT;
             message="L3D Cube!";
             cube.marquee(message, pos, cube.colorMap(frameCount%1000, 0, 1000));
             break;  
         case(4):
+            cube.selectedFont=FontType::SKINNY_FONT;
             message="cubism";
             cube.scrollText(message, Point(pos - (message.length() + 1), 0, 4), cube.colorMap(frameCount%1000, 0, 1000));
             break;  
         case(5):
+            cube.selectedFont=FontType::SKINNY_FONT;
             message="1^3";
             cube.scrollSpinningText(message, Point(pos - (message.length() + 1), 0, 3), cube.colorMap(frameCount%1000, 0, 1000));
             break;
     }
     frameCount++;
     pos += posInc;
-    if (pos > (message.length() + 1) * cube.size) {
+    if (pos > (message.length() + 1) * endOfMessage) {
         pos = 0;
         mode++;
         cube.done = true;
